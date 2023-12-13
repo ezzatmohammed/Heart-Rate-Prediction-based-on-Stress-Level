@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Heart Rate Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="container">
+    <div class="title"><center>Heart Rate Prediction</center></div>
+    <div class="content">
+      <form action="/predict" method="post">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Mean of RR intervals:</span>
+            <input type="number" name="MEAN_RR" step="0.00000000000000001" id="MEAN_RR">
+          </div>
+          <div class="input-box">
+            <span class="details">Median of RR intervals:</span>
+            <input type="number" name="MEDIAN_RR" step="0.00000000000000001" id="MEDIAN_RR">
+    
+          </div>
+          
+          <div class="input-box">
+            <span class="details">Standard deviation of RR intervals:</span>
+            <input type="number" name="SDRR" step="0.00000000000000001" id="SDRR">
+          </div>
+         
+          <div class="input-box">
+            <span class="details">Root mean square of successive RR interval:</span>
+            <input type="number" name="RMSSD" step="0.00000000000000001" id="RMSSD">
+          </div>
+          <div class="input-box">
+            <span class="details">Standard deviation of successive RR interval differences:</span>
+            <input type="number" name="SDSD" step="0.00000000000000001" id="SDSD">
+          </div>
+          <div class="input-box">
+            <span class="details">Ratio of SDRR / RMSS:</span>
+            <input type="number" name="SDRR_RMSSD" step="0.00000000000000001" id="SDRR_RMSSD">
+          </div>
+          <div class="input-box">
+            <span class="details">Percentage of successive RR intervals that differ by more than 25 ms:</span>
+            <input type="number" name="pNN25" step="0.00000000000000001" id="pNN25">
+          </div>
+          <div class="input-box">
+            <span class="details">Percentage of successive RR intervals that differ by more than 50 ms:</span>
+            <input type="number" name="pNN50" step="0.00000000000000001" id="pNN50">
+          </div>
+          <div class="input-box">
+            <span class="details">Kurtosis of distribution of successive RR intervals:</span>
+            <input type="number" name="KURT" step="0.00000000000000001" id="KURT">
+          </div>
+          <div class="input-box">
+            <span class="details">Skew of distribution of successive RR intervals:</span>
+            <input type="number" name="SKEW" step="0.00000000000000001" id="SKEW">
+          </div>
+          <div class="input-box">
+            <span class="details">Mean of relative RR intervals:</span>
+            <input type="number" name="MEAN_REL_RR" step="0.00000000000000001" id="MEAN_REL_RR">
+          </div>
+          <div class="input-box">
+            <span class="details">Median of relative RR intervals:</span>
+            <input type="number" name="MEDIAN_REL_RR" step="0.00000000000000001" id="MEDIAN_REL_RR">
+          </div>
+          <div class="input-box">
+            <span class="details">Standard deviation of relative RR intervals:</span>
+            <input type="number" name="SDRR_REL_RR" step="0.00000000000000001" id="SDRR_REL_RR">
+          </div>
+          <div class="input-box">
+            <span class="details">Root mean square of successive relative RR interval differences:</span>
+            <input type="number" name="RMSSD_REL_RR" step="0.00000000000000001" id="RMSSD_REL_RR">
+          </div>
+          <div class="input-box">
+            <span class="details">Standard deviation of successive relative RR interval differences:</span>
+            <input type="number" name="SDSD_REL_RR" step="0.00000000000000001" id="SDSD_REL_RR">
+          </div>
+          <div class="input-box">
+            <span class="details">Ratio of SDRR/RMSSD for relative RR interval differences:</span>
+            <input type="number" name="SDRR_RMSSD_REL_RR" step="0.00000000000000001" id="SDRR_RMSSD_REL_RR">
+          </div>
+          <div class="input-box">
+            <span class="details">Kurtosis of distribution of relative RR intervals:</span>
+            <input type="number" name="KURT_REL_RR" step="0.00000000000000001" id="KURT_REL_RR">
+          </div>
+          <div class="input-box">
+            <span class="details">Skewness of distribution of relative RR intervals:</span>
+            <input type="number" name="SKEW_REL_RR" step="0.00000000000000001" id="SKEW_REL_RR">
+          </div>
+          <div class="input-box">
+            <span class="details">Absolute power of the very low frequency band (0.0033 - 0.04 Hz):</span>
+            <input type="number" name="VLF" step="0.00000000000000001" id="VLF">
+          </div>
+          <div class="input-box">
+            <span class="details">Principal component transform of VLF:</span>
+            <input type="number" name="VLF_PCT" step="0.00000000000000001" id="VLF_PCT">
+          </div>
+          <div class="input-box">
+            <span class="details">Absolute power of the low frequency band (0.04 - 0.15 Hz):</span>
+            <input type="number" name="LF" step="0.00000000000000001" id="LF">
+          </div>
+          <div class="input-box">
+            <span class="details">Principal component transform of LF::</span>
+            <input type="number" name="LF_PCT" step="0.00000000000000001" id="LF_PCT">
+          </div>
+          <div class="input-box">
+            <span class="details"> Absolute power of the low frequency band in normal units:</span>
+            <input type="number" name="LF_NU" step="0.00000000000000001" id="LF_NU">
+          </div>
+          <div class="input-box">
+            <span class="details">Absolute power of the high frequency band (0.15 - 0.4 Hz):</span>
+            <input type="number" name="HF" step="0.00000000000000001" id="HF">
+          </div>
+          <div class="input-box">
+            <span class="details">Principal component transform of HF:</span>
+            <input type="number" name="HF_PCT" step="0.00000000000000001" id="HF_PCT">
+          </div>
+          <div class="input-box">
+            <span class="details"> Absolute power of the highest frequency band in normal units:</span>
+            <input type="number" name="HF_NU" step="0.00000000000000001" id="HF_NU">
+          </div>
+          <div class="input-box">
+            <span class="details"> Total power of RR intervals:</span>
+            <input type="number" name="TP" step="0.00000000000000001" id="TP">
+          </div>
+          <div class="input-box">
+            <span class="details">Ratio of LF to HF:</span>
+            <input type="number" name="LF_HF" step="0.00000000000000001" id="LF_HF">
+          </div>
+          <div class="input-box">
+            <span class="details">Ratio of HF to LF:</span>
+            <input type="number" name="HF_LF" step="0.00000000000000001" id="HF_LF">
+          </div>
+          <div class="input-box">
+            <span class="details">Poincaré plot standard deviation perpendicular to the line of identity:</span>
+            <input type="number" name="SD1" step="0.00000000000000001" id="SD1">
+          </div>
+          <div class="input-box">
+            <span class="details">Poincaré plot standard deviation along the line of identity:</span>
+            <input type="number" name="SD2" step="0.00000000000000001" id="SD2">
+          </div>
+          <div class="input-box">
+            <span class="details">sample entropy which measures the regularity and complexity of a time series:</span>
+            <input type="number" name="sampen" step="0.00000000000000001" id="sampen">
+          </div>
+          <div class="input-box">
+            <span class="details">higuci fractal dimension of heartrate:</span>
+            <input type="number" name="higuci" step="0.00000000000000001" id="higuci">
+          </div>
+          <div class="input-box">
+            <span class="details">condition of the patient:</span>
+            <select name="condition" id="condition">
+              <option value="0" label="no stress">0</option>
+
+              <option value="1" label="interruption">1</option>
+
+              <option value="2" label="time pressure">2</option>
+
+          </select>
+          </div>
+          <div class="input-box">
+               </select>
+          </div>
+ 
+
+        </div>
+        
+        <div  class="button">
+          <input type="submit" value="Predict" class="center-button">
+        </div> 
+        {% if error_message %}
+        <div class="error-message"><center>{{ error_message }}</center></div>
+        {% endif %}
+
+        {% if prediction %}
+        <p><center>{{ prediction }}</center></p>
+        {% endif %}
+          </div>
+        </div>
+      </form>
+      
+  </div>
+</body>
+</html>
